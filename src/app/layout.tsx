@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { fontMono, fontSans } from '@/lib/fonts'
 import { cn } from '@/lib/utils';
-import { SessionProvider } from "next-auth/react";
+import { Navbar } from "@/components/Navbar";
+import { AuthProvider } from "@/components/AuthProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,7 +24,10 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <SessionProvider>{children}</SessionProvider>
+        <AuthProvider>
+          <Navbar />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

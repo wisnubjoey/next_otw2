@@ -102,8 +102,18 @@ export function Navbar() {
               <SheetTrigger asChild>
                 <Menu className="h-6 w-6 cursor-pointer" />
               </SheetTrigger>
-              <SheetContent side="right" className="w-full sm:w-[400px] p-0">
-                <NavItems />
+              <SheetContent side="top" className="h-full p-4">
+                <div className='flex flex-col gap-2 justify-center items-center h-full'>
+                  <Button className="w-64">
+                    <Link href="/" className="w-full text-center">Home</Link>
+                  </Button>
+                  <Button className="w-64">
+                    <Link href="/about" className="w-full text-center">About</Link>
+                  </Button>
+                  <Button className="w-64">
+                    <Link href="/contact" className="w-full text-center">Contact</Link>
+                  </Button>
+                </div>
               </SheetContent>
             </Sheet>
           </div>

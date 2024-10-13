@@ -54,6 +54,16 @@ import {
       .references(() => users.id, { onDelete: 'cascade' }),
     expires: timestamp('expires', { mode: 'date' }).notNull(),
   })
+
+  export const posts = pgTable('post', {
+    id: text('id').primaryKey().$defaultFn(() => crypto.randomUUID()),
+    userId: text('user_id').notNull().references(() => users.id),
+    title: text('title').notNull(),
+    description: text('description'),
+    imageUrl: text('image_url'),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  })
   
   export const verificationTokens = pgTable(
     'verificationToken',
@@ -65,4 +75,6 @@ import {
     (vt) => ({
       compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
     }),
+
+    
   )
