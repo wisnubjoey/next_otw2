@@ -88,6 +88,7 @@ const Page = async () => {
         <h2 className="text-2xl font-bold mb-4">Recent Posts</h2>
         <ProfilePostCard posts={posts}/>
       </div>
+
     </div>
   )
 }

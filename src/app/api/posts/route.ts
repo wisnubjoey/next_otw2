@@ -12,9 +12,11 @@ export async function GET(req: NextRequest) {
                 createdAt: posts.createdAt,
                 userId: posts.userId,
                 userName: users.name,
+                imageUrl: posts.imageUrl, // Tambahkan ini
             }).from(posts).leftJoin(users, eq(posts.userId, users.id)).orderBy(posts.createdAt)
             return NextResponse.json(allPosts, { status: 200 })
-        } catch {
+        } catch (error) {
+            console.error("Error fetching posts:", error);
             return NextResponse.json({ message: 'Internal server error' }, { status: 500 })
         }
     } else {
