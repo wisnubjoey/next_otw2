@@ -34,3 +34,6 @@ next-env.d.ts
 
 # Ignore index.js
 /index.js
+
+# Ignore local environment file
+.env.local
