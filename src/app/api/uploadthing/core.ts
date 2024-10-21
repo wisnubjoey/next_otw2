@@ -7,7 +7,7 @@ import { posts } from "@/lib/schema";
 const f = createUploadthing();
 
 export const ourFileRouter = {
-  imageUploader: f({ image: { maxFileSize: "4MB" } })
+  imageUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 6} })
     .middleware(async ({ req }) => {
       const session = await auth();
       if (!session || !session.user) {

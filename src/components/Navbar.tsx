@@ -90,10 +90,16 @@ export function Navbar() {
           </div>
         </div>
         <div className="flex items-center">
-          {!session && (
+          {!session ? (
             <Link href="/access" passHref>
               <Button className="mr-4">
                 Sign In | Sign Up
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/dashboard" passHref>
+              <Button className="mr-4">
+                Dashboard
               </Button>
             </Link>
           )}

@@ -4,6 +4,15 @@ import { formatDate } from "@/lib/date";
 import Image from "next/image";
 import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
 import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { cn } from "@/lib/utils";
 
 interface Post {
   id: string;
@@ -23,46 +32,38 @@ const ProfilePostCard: React.FC<PostListProps> = ({ posts }) => {
   const [imageError, setImageError] = useState<{ [key: string]: boolean }>({});
   console.log("Received posts:", posts);
   console.log("Image error status:", imageError);
-  
+
   return (
     <div className="space-y-4">
       {posts.map((post) => (
-        <CardContainer className="inter-var" key={post.id}>
-          <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border">
-            <CardItem
-              translateZ="50"
-              className="text-xl font-bold text-neutral-600 dark:text-white"
-            >
-              <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
-              <p className="text-gray-600 mb-2">{post.description}</p>
-              <p className="text-sm text-gray-500">
-                Posted on:{" "}
-                <span className="text-blue-500 font-semibold">
-                  {formatDate(post.createdAt)} by {post.userName}
-                </span>
+        <div className="w-80 group/card hover:scale-105 duration-300" key={post.id}>
+          <div
+            className={cn(
+              "cursor-pointer overflow-hidden relative card h-96 rounded-md shadow-xl max-w-sm mx-auto backgroundImage flex flex-col justify-between p-4",
+              "bg-cover",
+              post.imageUrl ? "" : "bg-black"
+            )}
+            style={post.imageUrl ? { backgroundImage: `url(${post.imageUrl})` } : {}}
+          >
+            <div className="absolute w-full h-full top-0 left-0 transition duration-300 bg-black opacity-30 group-hover/card:opacity-0"></div>
+            <div className="flex flex-row items-center space-x-4 z-10">
+              <div className="flex flex-col">
+                <p className="font-normal text-base text-gray-50 relative z-10 hover:underline hover:decoration-solid hover:underline-offset-4">
+                  {post.userName}
+                </p>
+                <p className="text-sm text-gray-400">{formatDate(post.createdAt)}</p>
+              </div>
+            </div>
+            <div className="text content">
+              <h1 className="font-bold text-xl md:text-2xl text-gray-50 relative z-10">
+                {post.title}
+              </h1>
+              <p className="font-normal text-sm text-gray-50 relative z-10 my-4">
+                {post.description}
               </p>
-            </CardItem>
-            <CardItem translateZ="100" className="w-full mt-4">
-            {post.imageUrl ? (
-  <Image
-    src={post.imageUrl}
-    alt={post.title}
-    height={1000}
-    width={1000}
-    className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
-    onError={() => {
-      console.error("Error loading image:", post.imageUrl);
-      setImageError(prev => ({ ...prev, [post.id]: true }));
-    }}
-  />
-) : (
-  <div className="h-60 w-full flex items-center justify-center bg-gray-200 rounded-xl">
-    <span className="text-gray-500">No image URL provided</span>
-  </div>
-)}
-            </CardItem>
-          </CardBody>
-        </CardContainer>
+            </div>
+          </div>
+        </div>
       ))}
     </div>
   );

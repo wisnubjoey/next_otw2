@@ -1,4 +1,5 @@
 import PostList from "@/components/PostCard";
+import ProfilePostCard from "@/components/ProfilePostCard";
 import Image from "next/image";
 
 
@@ -25,6 +26,8 @@ export default async function Home() {
     />
       </div>
     </div>
+
+    <ProfilePostCard posts={posts}/>
     </>
   );
 }
