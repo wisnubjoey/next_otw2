@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,6 +23,7 @@ import { useSession } from 'next-auth/react'
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const { data: session } = useSession()
+  const pathname = usePathname()
 
   const NavItems = () => (
     <ul className="grid gap-3 p-6 sm:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
@@ -96,13 +98,13 @@ export function Navbar() {
                 Sign In | Sign Up
               </Button>
             </Link>
-          ) : (
+          ) : pathname !== '/dashboard' ? (
             <Link href="/dashboard" passHref>
               <Button className="mr-4">
                 Dashboard
               </Button>
             </Link>
-          )}
+          ) : null}
           <div className="sm:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>

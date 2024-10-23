@@ -33,12 +33,14 @@ const Page = async () => {
       <div className="md:hidden">
         {/* Profile */}
         <div className="mb-4 text-center">
-          <Card className="w-80 rounded-lg overflow-hidden">
+          <Card className="w-96 rounded-lg overflow-hidden">
             <div className="h-24 relative">
               <div
                 className="absolute inset-0 bg-gradient-to-br from-primary to-secondary"
                 style={{
-                  backgroundImage: `url(${session.user.image || "/profile.png"})`,
+                  backgroundImage: `url(${
+                    session.user.image || "/profile.png"
+                  })`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   filter: "blur(10px) brightness(0.7)",
@@ -95,7 +97,11 @@ const Page = async () => {
                   }}
                   className="pb-2"
                 >
-                  <Button type="submit" variant="destructive" className="w-full">
+                  <Button
+                    type="submit"
+                    variant="destructive"
+                    className="w-full"
+                  >
                     Sign Out
                   </Button>
                 </form>
@@ -114,13 +120,13 @@ const Page = async () => {
       {/* Mobile Page End*/}
 
       {/* Web Page */}
-      <div className="hidden md:block w-full">
-        {/* Add your web page content here */}
-        <h1 className="text-4xl font-bold text-center mb-8">Dashboard</h1>
-        <div className="flex flex-col items-center justify-center">
-          <ProfilePostCard posts={posts} />
+      <div className="hidden md:block w-full max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold text-center mb-8">Recent Posts</h1>
+        <div className="flex justify-center items-center">
+          <div className="w-full max-w-6xl">
+            <ProfilePostCard posts={posts} />
+          </div>
         </div>
-        {/* You can add more components and layout for the web view */}
       </div>
     </div>
   );
