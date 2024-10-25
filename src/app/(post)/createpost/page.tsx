@@ -1,6 +1,14 @@
 import Link from 'next/link';
+import { auth } from "@/lib/auth"
+import { redirect } from "next/navigation"
 
-export default function CreatePostPage() {
+export default async function CreatePostPage() {
+  const session = await auth()
+  
+  if (!session) {
+    redirect('/access')
+  }
+
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Choose Upload Type</h1>

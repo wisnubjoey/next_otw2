@@ -14,8 +14,8 @@ import {
 } from "@/components/ui/dialog";
 import ProfilePostCard from "@/components/ProfilePostCard";
 
-async function getPosts() {
-  const res = await fetch("http://localhost:3000/api/posts", {
+async function getPosts(userId: string) {
+  const res = await fetch(`http://localhost:3000/api/posts?userId=${userId}`, {
     cache: "no-store",
   });
   if (!res.ok) throw new Error("Failed to fetch posts");
@@ -24,8 +24,9 @@ async function getPosts() {
 
 const Page = async () => {
   const session = await auth();
-  const posts = await getPosts();
   if (!session) return redirect("/access");
+
+  const posts = await getPosts(session.user.id);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">

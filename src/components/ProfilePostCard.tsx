@@ -3,16 +3,15 @@
 import { formatDate } from "@/lib/date";
 import Link from "next/link";
 import { useState } from "react";
-import { cn } from "@/lib/utils";
 
 interface Post {
   id: string;
   title: string;
   description: string;
+  mediaUrl: string;
+  mediaType: 'image' | 'video';
   createdAt: string;
-  updatedAt: string;
   userName: string;
-  imageUrl: string;
 }
 
 interface PostListProps {
@@ -20,21 +19,36 @@ interface PostListProps {
 }
 
 const ProfilePostCard: React.FC<PostListProps> = ({ posts }) => {
-  const [imageError, setImageError] = useState<{ [key: string]: boolean }>({});
+  const renderMedia = (post: Post) => {
+    if (post.mediaType === 'video') {
+      return (
+        <video 
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+        >
+          <source src={post.mediaUrl} type="video/mp4" />
+        </video>
+      );
+    }
+
+    return (
+      <div 
+        className="absolute inset-0 w-full h-full bg-cover bg-center"
+        style={{ backgroundImage: `url(${post.mediaUrl})` }}
+      />
+    );
+  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
       {posts.map((post) => (
         <div className="group/card hover:scale-105 duration-300 w-full min-w-[384px] md:min-w-0 md:max-w-[500px]" key={post.id}>
           <Link href={`/posts/${post.id}`}>
-            <div
-              className={cn(
-                "cursor-pointer overflow-hidden relative card h-96 rounded-md shadow-xl mx-auto backgroundImage flex flex-col justify-between p-4",
-                "bg-cover",
-                post.imageUrl ? "" : "bg-black"
-              )}
-              style={post.imageUrl ? { backgroundImage: `url(${post.imageUrl})` } : {}}
-            >
+            <div className="cursor-pointer overflow-hidden relative card h-96 rounded-md shadow-xl mx-auto flex flex-col justify-between p-4">
+              {post.mediaUrl && renderMedia(post)}
               <div className="absolute w-full h-full top-0 left-0 transition duration-300 bg-black opacity-30 group-hover/card:opacity-0"></div>
               <div className="flex flex-row items-center space-x-4 z-10">
                 <div className="flex flex-col">

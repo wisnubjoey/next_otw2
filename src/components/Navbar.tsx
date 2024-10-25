@@ -31,7 +31,7 @@ export function Navbar() {
         <NavigationMenuLink asChild>
           <a
             className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-            href="/"
+            href="/createpost"
           >
             <div className="mb-2 mt-4 text-lg font-medium">
               Home
@@ -46,7 +46,7 @@ export function Navbar() {
         <NavigationMenuLink asChild>
           <a
             className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-            href="/about"
+            href="/createpost/image"
           >
             <div className="text-sm font-medium leading-none">About</div>
             <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
@@ -59,7 +59,7 @@ export function Navbar() {
         <NavigationMenuLink asChild>
           <a
             className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-            href="/contact"
+            href="/createpost/video"
           >
             <div className="text-sm font-medium leading-none">Contact</div>
             <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">

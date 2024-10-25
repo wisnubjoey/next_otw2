@@ -11,7 +11,7 @@ interface PostListProps {
     posts: Post[]
 }
 
-const PostList: React.FC<PostListProps> = ({ posts }) => {
+const HomePost: React.FC<PostListProps> = ({ posts }) => {
     return (
         <div>
             <h2>Recent Posts</h2>
@@ -30,4 +30,4 @@ const PostList: React.FC<PostListProps> = ({ posts }) => {
     )
 }
 
-export default PostList
+export default HomePost
