@@ -14,6 +14,8 @@ export async function GET(req: NextRequest) {
                 createdAt: posts.createdAt,
                 userId: posts.userId,
                 userName: users.name,
+                mediaUrl: posts.mediaUrl, // Pastikan ini sesuai dengan nama kolom di database
+        mediaType: posts.mediaType, // Pastikan ini sesuai dengan nama kolom di database
             }).from(posts).leftJoin(users, eq(posts.userId, users.id));
 
             if (userId) {
